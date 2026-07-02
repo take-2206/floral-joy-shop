@@ -15,7 +15,7 @@
     <div class="order-block">
       <div class="order-head">
         <div class="eyebrow">受け取り方法をお選びください</div>
-        <h2>店舗受け取り、それともお届け？</h2>
+        <h2>カート</h2>
         <p>花は最後の瞬間まで新鮮なまま。ご都合に合わせて、時間と場所をお選びいただけます。</p>
       </div>
 
@@ -58,12 +58,16 @@
               <option>フローラル・ジョイ 横浜店</option>
             </select>
           </div>
+          <div class="field" id="date-field" style="display:none;">
+            <label>お届け希望日</label>
+            <input type="date" id="delivery-date">
+          </div>
           <div class="field">
             <label id="time-label">受け取り希望時間</label>
             <input type="time" value="15:00">
           </div>
           <div class="field full" id="address-field" style="display:none;">
-            <label>お届け先のご住所</label>
+            <label>住所</label>
             <input type="text" placeholder="例：東京都渋谷区〇〇1-2-3 〇〇マンション101">
           </div>
           <div class="field full">
@@ -71,6 +75,10 @@
             <input type="text" placeholder="お誕生日おめでとう。これからも輝く毎日を。">
           </div>
         </div>
+           <div class="field full">
+            <label>メモ</label>
+            <input type="text" placeholder="ご希望の色味やお相手のイメージなどをお伝えください。">
+          </div>
         <div class="order-summary">
           <div class="total"><span id="order-total">￥0</span> <small id="fee-note">店舗受け取りは送料無料</small></div>
           <button class="btn-on-dark" id="confirm-btn" onclick="confirmOrder()">注文を確定する</button>
@@ -85,7 +93,7 @@
     <button class="modal-close" onclick="closeShippingModal()">✕</button>
     <div class="info-block">
       <div class="info-head">
-        <div class="eyebrow">サポート</div>
+       
         <h2>配送について</h2>
         <p>店舗受け取り・お届け、どちらもお花の鮮度を第一に、丁寧にお手配いたします。</p>
       </div>
@@ -126,7 +134,7 @@
     <button class="modal-close" onclick="closeContactModal()">✕</button>
     <div class="info-block">
       <div class="info-head">
-        <div class="eyebrow">サポート</div>
+       
         <h2>お問い合わせ</h2>
         <p>ご不明な点やご相談がございましたら、お気軽にお問い合わせください。担当者より2営業日以内にご返信いたします。</p>
       </div>
@@ -188,7 +196,7 @@
     </div>
     <div class="nav-links">
       <a href="#products">商品</a>
-      <a href="#" onclick="goToOrder(); return false;">花を注文する</a>
+
       <a href="#how">ご利用の流れ</a>
       <a href="#about">私たちについて</a>
     </div>
@@ -198,12 +206,13 @@
       <span></span>
     </button>
     <button class="nav-cta disabled" id="cart-btn" onclick="goToOrder()">
-      <img src="img/shopping-cart.png" alt=""> <span class="cart-count">0</span>
+      <img src="img/shopping-bag.png" alt=""> 
+      <span class="cart-count">0</span>
     </button>
   </div>
   <div class="mobile-menu" id="mobile-menu">
     <a href="#products" onclick="closeMobileMenu()">商品</a>
-    <a href="#" onclick="closeMobileMenu(); goToOrder(); return false;">花を注文する</a>
+    
     <a href="#how" onclick="closeMobileMenu()">ご利用の流れ</a>
     <a href="#about" onclick="closeMobileMenu()">私たちについて</a>
   </div>
@@ -256,7 +265,7 @@
     <p>ご注文いただいた当日に、職人がひとつひとつ丁寧に仕上げます。</p>
   </div>
    <div class="prod-grid">
-    <div class="prod-card">
+    <div class="prod-card" data-product-id="bouquet-s">
       <div class="prod-img">
         <span class="prod-badge">S</span>
         <img src="./img/s.png" alt="赤いバラの花束">
@@ -270,7 +279,7 @@
         </div>
       </div>
     </div>
-    <div class="prod-card">
+    <div class="prod-card" data-product-id="bouquet-m">
       <div class="prod-img">
         <span class="prod-badge">M</span>
         <img src="./img/M.png" alt="一輪の花">
@@ -284,7 +293,7 @@
         </div>
       </div>
     </div>
-    <div class="prod-card">
+    <div class="prod-card" data-product-id="bouquet-l">
       <div class="prod-img">
         <span class="prod-badge">L</span>
         <img src="./img/L.png" alt="花かごのアレンジメント">
@@ -347,7 +356,7 @@
     <div>
       <h5>お買い物</h5>
       <p><a href="#products">すべての商品</a></p>
-      <p><a href="#" onclick="goToOrder(); return false;">花を注文する</a></p>
+      <p><a href="#" onclick="goToOrder(); return false;">ご注文の確認</a></p>
     </div>
     <div>
       <h5>サポート</h5>
@@ -357,8 +366,9 @@
     </div>
     <div>
       <h5>店舗情報</h5>
-      <p>渋谷・銀座・横浜</p>
       <p>毎日 9:00〜21:00</p>
+      <p>電話番号: 0120-000-000</p>
+    
     </div>
   </div>
   <div class="foot-bottom">
@@ -546,11 +556,19 @@
 
   // Close modal when clicking outside
   document.addEventListener('DOMContentLoaded', function(){
-    const modal = document.getElementById('order-modal');
-    modal.addEventListener('click', function(e){
-      if(e.target === modal){
-        closeOrderModal();
-      }
+    const modalCloseMap = [
+      ['order-modal', closeOrderModal],
+      ['shipping-modal', closeShippingModal],
+      ['contact-modal', closeContactModal]
+    ];
+
+    modalCloseMap.forEach(function([id, closeFn]){
+      const modal = document.getElementById(id);
+      modal.addEventListener('click', function(e){
+        if(e.target === modal){
+          closeFn();
+        }
+      });
     });
 
     document.addEventListener('click', function(e){
@@ -566,6 +584,11 @@
         closeMobileMenu();
       }
     });
+
+    const deliveryDateInput = document.getElementById('delivery-date');
+    const todayStr = new Date().toISOString().slice(0, 10);
+    deliveryDateInput.min = todayStr;
+    deliveryDateInput.value = todayStr;
   });
 
   function setMethod(method){
@@ -575,6 +598,7 @@
     const title = document.getElementById('detail-title');
     const locField = document.getElementById('loc-field');
     const addressField = document.getElementById('address-field');
+    const dateField = document.getElementById('date-field');
     const timeLabel = document.getElementById('time-label');
     const feeNote = document.getElementById('fee-note');
 
@@ -584,6 +608,7 @@
       title.textContent = '店舗受け取りのご注文情報';
       locField.style.display = '';
       addressField.style.display = 'none';
+      dateField.style.display = 'none';
       timeLabel.textContent = '受け取り希望時間';
     } else {
       deliveryBtn.classList.add('active');
@@ -591,6 +616,7 @@
       title.textContent = '自宅お届けのご注文情報';
       locField.style.display = 'none';
       addressField.style.display = '';
+      dateField.style.display = '';
       timeLabel.textContent = 'お届け希望時間帯';
     }
 
