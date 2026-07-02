@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FLORAL JOY | フローラル・ジョイ ― あなたの毎日を彩る花</title>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<div class="modal-overlay" id="order-modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeOrderModal()">✕</button>
+    <div class="order-block">
+      <div class="order-head">
+        <div class="eyebrow">受け取り方法をお選びください</div>
+        <h2>店舗受け取り、それともお届け？</h2>
+        <p>花は最後の瞬間まで新鮮なまま。ご都合に合わせて、時間と場所をお選びいただけます。</p>
+      </div>
+
+      <div class="cart-review" id="cart-review">
+        <h4>ご注文内容の確認</h4>
+        <div class="cart-list" id="cart-list"></div>
+        <div class="cart-empty" id="cart-empty">
+          カートに商品がありません。まずは商品をお選びください。
+          <button class="cart-empty-btn" onclick="closeOrderModal(); document.getElementById('products').scrollIntoView();">商品を見る</button>
+        </div>
+      </div>
+
+      <div class="method-toggle">
+        <button class="method-btn active" id="btn-pickup" onclick="setMethod('pickup')">
+          <h4>店舗で受け取る</h4>
+          <span>最短15分でご用意</span>
+        </button>
+        <button class="method-btn" id="btn-delivery" onclick="setMethod('delivery')">
+          <h4>自宅へ届ける</h4>
+          <span>当日2〜4時間でお届け・送料¥350〜</span>
+        </button>
+      </div>
+
+      <div class="order-detail">
+        <h4 id="detail-title">店舗受け取りのご注文情報</h4>
+        <div class="field-grid">
+          <div class="field">
+            <label>お名前</label>
+            <input type="text" placeholder="山田 花子">
+          </div>
+          <div class="field">
+            <label>電話番号</label>
+            <input type="text" placeholder="090-1234-5678">
+          </div>
+          <div class="field" id="loc-field">
+            <label>受け取り店舗</label>
+            <select>
+              <option>フローラル・ジョイ 渋谷店</option>
+              <option>フローラル・ジョイ 銀座店</option>
+              <option>フローラル・ジョイ 横浜店</option>
+            </select>
+          </div>
+          <div class="field">
+            <label id="time-label">受け取り希望時間</label>
+            <input type="time" value="15:00">
+          </div>
+          <div class="field full" id="address-field" style="display:none;">
+            <label>お届け先のご住所</label>
+            <input type="text" placeholder="例：東京都渋谷区〇〇1-2-3 〇〇マンション101">
+          </div>
+          <div class="field full">
+            <label>メッセージカード</label>
+            <input type="text" placeholder="お誕生日おめでとう。これからも輝く毎日を。">
+          </div>
+        </div>
+        <div class="order-summary">
+          <div class="total"><span id="order-total">￥0</span> <small id="fee-note">店舗受け取りは送料無料</small></div>
+          <button class="btn-on-dark" id="confirm-btn" onclick="confirmOrder()">注文を確定する</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="shipping-modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeShippingModal()">✕</button>
+    <div class="info-block">
+      <div class="info-head">
+        <div class="eyebrow">サポート</div>
+        <h2>配送について</h2>
+        <p>店舗受け取り・お届け、どちらもお花の鮮度を第一に、丁寧にお手配いたします。</p>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="info-icon">🏬</div>
+          <h4>店舗で受け取る</h4>
+          <p>ご注文から最短15分でご用意します。渋谷・銀座・横浜の各店舗でお受け取りいただけます。送料はかかりません。</p>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">🚚</div>
+          <h4>ご自宅へお届け</h4>
+          <p>当日2〜4時間程度でお届けします。送料は一律¥350〜で、配送先エリアやお届け時間帯によって変動する場合がございます。</p>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">📦</div>
+          <h4>梱包について</h4>
+          <p>お花が傷まないよう、専用ボックスに入れて丁寧に梱包し、鮮度を保ったままお届けします。</p>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">🕒</div>
+          <h4>お届け時間帯</h4>
+          <p>毎日9:00〜21:00の間で承っております。時間帯のご指定がある場合は、ご注文時の備考欄にご記入ください。</p>
+        </div>
+      </div>
+
+      <div class="info-note">
+        <h4>ご注意事項</h4>
+        <p>天候や交通状況により、お届けまでのお時間が前後する場合がございます。ギフトでご利用の場合は、事前に受取人様のご在宅時間をご確認いただくことをおすすめします。配送エリア外のご住所については、お問い合わせフォームよりご相談ください。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="contact-modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeContactModal()">✕</button>
+    <div class="info-block">
+      <div class="info-head">
+        <div class="eyebrow">サポート</div>
+        <h2>お問い合わせ</h2>
+        <p>ご不明な点やご相談がございましたら、お気軽にお問い合わせください。担当者より2営業日以内にご返信いたします。</p>
+      </div>
+
+      <div class="contact-methods">
+        <div class="contact-method">
+          <div class="info-icon">📞</div>
+          <h4>お電話でのお問い合わせ</h4>
+          <p>0120-000-000（毎日 9:00〜21:00）</p>
+        </div>
+        <div class="contact-method">
+          <div class="info-icon">✉️</div>
+          <h4>メールでのお問い合わせ</h4>
+          <p>support@floraljoy.jp</p>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contact-form" onsubmit="submitContactForm(event)">
+        <div class="field-grid">
+          <div class="field-light">
+            <label>お名前</label>
+            <input type="text" placeholder="山田 花子" required>
+          </div>
+          <div class="field-light">
+            <label>メールアドレス</label>
+            <input type="email" placeholder="hanako@example.com" required>
+          </div>
+          <div class="field-light full">
+            <label>お問い合わせ内容</label>
+            <select required>
+              <option value="">選択してください</option>
+              <option>ご注文について</option>
+              <option>配送について</option>
+              <option>商品について</option>
+              <option>その他</option>
+            </select>
+          </div>
+          <div class="field-light full">
+            <label>詳細</label>
+            <textarea rows="4" placeholder="お問い合わせ内容をご記入ください。" required></textarea>
+          </div>
+        </div>
+        <div class="contact-submit">
+          <button type="submit" class="btn-on-light">送信する</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<nav class="nav">
+  <div class="nav-row">
+    <div class="logo-mark">
+      <img src="img/logo.png" alt="FLORAL JOY ロゴ">
+      <div class="logo-text">
+        <span class="en">FLORAL JOY</span>
+        <span class="jp-sub jp">フローラル・ジョイ</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#products">商品</a>
+      <a href="#" onclick="goToOrder(); return false;">花を注文する</a>
+      <a href="#how">ご利用の流れ</a>
+      <a href="#about">私たちについて</a>
+    </div>
+    <button class="menu-toggle" id="menu-toggle" aria-label="メニューを開く" aria-expanded="false" onclick="toggleMobileMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <button class="nav-cta disabled" id="cart-btn" onclick="goToOrder()">
+      <img src="img/shopping-cart.png" alt=""> <span class="cart-count">0</span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#products" onclick="closeMobileMenu()">商品</a>
+    <a href="#" onclick="closeMobileMenu(); goToOrder(); return false;">花を注文する</a>
+    <a href="#how" onclick="closeMobileMenu()">ご利用の流れ</a>
+    <a href="#about" onclick="closeMobileMenu()">私たちについて</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="eyebrow">一ONLINE FLOWER SHOP一</div>
+      <h1>FLORAL JOY</h1>
+      <p class="lede">毎日の暮らしに新鮮な花を。インテリアとして、大切な人への贈り物として。受け取り方法はあなた次第 ― 店舗でお受け取りか、ご自宅へのお届けをお選びいただけます。</p>
+      <div class="hero-cta-row">
+        <button class="btn-primary" onclick="document.getElementById('products').scrollIntoView()">今すぐ注文する</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="jp">一輪の花 · single flower</span>
+    <span>当日お届け</span>
+    <span class="jp">フローラル・ジョイ</span>
+    <span> 店舗受け取りのご注文は最短15分でご用意</span>
+    <span class="jp">花は友達のようなもの</span>
+    <span>毎朝届く新鮮な花</span>
+    <span class="jp">一輪の花 · single flower</span>
+    <span>当日お届け</span>
+    <span class="jp">フローラル・ジョイ</span>
+    <span>店舗受け取り</span>
+    <span class="jp">花は友達のようなもの</span>
+    <span>毎朝届く新鮮な花</span>
+  </div>
+</div>
+
+<section class="section wrap" id="about">
+  <div class="section-head">
+    <h2>私たちについて</h2>
+  </div>
+  <div class="about-copy">
+    <p>私たちは、旬の美しい花々を中心に、ひとつひとつ丁寧に花束をお作りしています。</p>
+    <p>花を贈る喜びと、受け取る喜び、その両方の「よろこび」を大切にしながら、お花を通して心に残るひとときをお届けします。</p>
+    <p>日常にそっと彩りと幸せを添える存在でありたいと願っています。</p>
+  </div>
+</section>
+
+<section class="section wrap" id="products">
+  <div class="section-head">
+    <h2>商品</h2>
+    <p>ご注文いただいた当日に、職人がひとつひとつ丁寧に仕上げます。</p>
+  </div>
+   <div class="prod-grid">
+    <div class="prod-card">
+      <div class="prod-img">
+        <span class="prod-badge">S</span>
+        <img src="./img/s.png" alt="赤いバラの花束">
+      </div>
+      <div class="prod-body">
+       <div class="en-name">気軽なギフトにおすすめ</div>
+        <h3>ブーケ（S）</h3>
+        <div class="prod-row">
+          <span class="price">¥3,300</span>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="prod-card">
+      <div class="prod-img">
+        <span class="prod-badge">M</span>
+        <img src="./img/M.png" alt="一輪の花">
+      </div>
+      <div class="prod-body">
+        <div class="en-name">人気のスタンダードサイズ</div>
+        <h3>ブーケ（M）</h3>
+        <div class="prod-row">
+          <span class="price">¥5,500</span>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="prod-card">
+      <div class="prod-img">
+        <span class="prod-badge">L</span>
+        <img src="./img/L.png" alt="花かごのアレンジメント">
+      </div>
+      <div class="prod-body">
+        <div class="en-name">特別なお祝いにおすすめ</div>
+        <h3>ブーケ（L）</h3>
+        <div class="prod-row">
+          <span class="price">¥8,800</span>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+
+</section>
+
+<section class="section wrap" id="how">
+  <div class="section-head">
+    <h2>ご注文はたったの4ステップ</h2>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="num">01</div>
+      <h3>花を選ぶ</h3>
+      <p>花束、アレンジメント、定期便の中からお好みの花を選びます。</p>
+    </div>
+    <div class="step">
+      <div class="num">02</div>
+      <h3>受け取り方法を選ぶ</h3>
+      <p>お近くの店舗で受け取るか、ご自宅へのお届けをお選びください。</p>
+    </div>
+    <div class="step">
+      <div class="num">03</div>
+      <h3>注文を確定する</h3>
+      <p>必要事項と希望日時を入力し、安全にお支払いいただけます。</p>
+    </div>
+    <div class="step">
+      <div class="num">04</div>
+      <h3>新鮮な花を受け取る</h3>
+      <p>丁寧に梱包された花を、ご希望の時間にお届けします。</p>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <h5 style="font-size:18px; font-family:'Cormorant Garamond',serif;">FLORAL JOY</h5>
+      <p>花は友達のようなもの、あなたの世界を明るく彩ります。</p>
+    </div>
+    <div>
+      <h5>お買い物</h5>
+      <p><a href="#products">すべての商品</a></p>
+      <p><a href="#" onclick="goToOrder(); return false;">花を注文する</a></p>
+    </div>
+    <div>
+      <h5>サポート</h5>
+      <p><a href="#how">ご利用の流れ</a></p>
+      <p><a href="#" onclick="openShippingModal(); return false;">配送について</a></p>
+      <p><a href="#" onclick="openContactModal(); return false;">お問い合わせ</a></p>
+    </div>
+    <div>
+      <h5>店舗情報</h5>
+      <p>渋谷・銀座・横浜</p>
+      <p>毎日 9:00〜21:00</p>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Floral Joy. デザイン案。</span>
+    <span class="jp">フローラル・ジョイ</span>
+  </div>
+</footer>
+
+<script>
+  // cart = [{ id, name, price, img, qty }]
+  let cart = [];
+  let currentMethod = 'pickup';
+  const deliveryFee = 350;
+
+  function formatYen(amount){
+    return '￥' + amount.toLocaleString('ja-JP');
+  }
+
+  function getCartCount(){
+    return cart.reduce((sum, item) => sum + item.qty, 0);
+  }
+
+  function getCartTotal(){
+    return cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  }
+
+  function toggleMobileMenu(){
+    const menu = document.getElementById('mobile-menu');
+    const toggle = document.getElementById('menu-toggle');
+    const isOpen = menu.classList.toggle('show');
+    toggle.classList.toggle('active', isOpen);
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  }
+
+  function closeMobileMenu(){
+    const menu = document.getElementById('mobile-menu');
+    const toggle = document.getElementById('menu-toggle');
+    menu.classList.remove('show');
+    toggle.classList.remove('active');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+
+  function renderCart(){
+    const listEl = document.getElementById('cart-list');
+    const emptyEl = document.getElementById('cart-empty');
+    const confirmBtn = document.getElementById('confirm-btn');
+    const cartCount = getCartCount();
+
+    // nav badge
+    document.querySelector('.cart-count').textContent = cartCount;
+    document.getElementById('cart-btn').classList.toggle('disabled', cartCount === 0);
+
+    if(cart.length === 0){
+      listEl.innerHTML = '';
+      listEl.style.display = 'none';
+      emptyEl.style.display = 'flex';
+      confirmBtn.disabled = true;
+      confirmBtn.classList.add('is-disabled');
+    } else {
+      listEl.style.display = 'flex';
+      emptyEl.style.display = 'none';
+      confirmBtn.disabled = false;
+      confirmBtn.classList.remove('is-disabled');
+
+      listEl.innerHTML = cart.map(item => `
+        <div class="cart-item" data-id="${item.id}">
+          <img class="cart-item-img" src="${item.img}" alt="">
+          <div class="cart-item-info">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-price">${formatYen(item.price)}</div>
+          </div>
+          <div class="cart-item-qty">
+            <button type="button" onclick="changeQty('${item.id}', -1)" aria-label="数量を減らす">−</button>
+            <span>${item.qty}</span>
+            <button type="button" onclick="changeQty('${item.id}', 1)" aria-label="数量を増やす">+</button>
+          </div>
+          <div class="cart-item-subtotal">${formatYen(item.price * item.qty)}</div>
+          <button type="button" class="cart-item-remove" onclick="removeFromCart('${item.id}')" aria-label="削除">✕</button>
+        </div>
+      `).join('');
+    }
+
+    updateOrderSummary();
+  }
+
+  function updateOrderSummary(){
+    const totalEl = document.getElementById('order-total');
+    const feeNote = document.getElementById('fee-note');
+    const cartCount = getCartCount();
+    const cartTotal = getCartTotal();
+    const fee = currentMethod === 'delivery' && cartCount > 0 ? deliveryFee : 0;
+
+    totalEl.textContent = formatYen(cartTotal + fee);
+    feeNote.textContent = currentMethod === 'delivery'
+      ? (cartCount > 0 ? '送料 ¥350 を含む' : '＋送料 ¥350〜')
+      : '店舗受け取りは送料無料';
+  }
+
+  function addToCart(btn){
+    const productCard = btn.closest('.prod-card');
+    const name = productCard.querySelector('h3').textContent.trim();
+    const priceText = productCard.querySelector('.price').textContent;
+    const price = Number(priceText.replace(/[^\d]/g, ''));
+    const img = productCard.querySelector('img') ? productCard.querySelector('img').src : '';
+    // Dùng data-product-id cố định để gộp giỏ hàng, phòng trường hợp
+    // sau này có 2 sản phẩm trùng tên (ví dụ khác màu/kích cỡ).
+    const id = productCard.dataset.productId || name;
+
+    const existing = cart.find(item => item.id === id);
+    if(existing){
+      existing.qty++;
+    } else {
+      cart.push({ id, name, price, img, qty: 1 });
+    }
+
+    renderCart();
+    btn.textContent = '✓';
+    setTimeout(()=>{btn.textContent = '+';}, 600);
+  }
+
+  function changeQty(id, delta){
+    const item = cart.find(i => i.id === id);
+    if(!item) return;
+    item.qty += delta;
+    if(item.qty <= 0){
+      cart = cart.filter(i => i.id !== id);
+    }
+    renderCart();
+  }
+
+  function removeFromCart(id){
+    cart = cart.filter(i => i.id !== id);
+    renderCart();
+  }
+
+  function goToOrder(){
+    const modal = document.getElementById('order-modal');
+    modal.classList.add('show');
+    document.body.classList.add('modal-open');
+    renderCart();
+  }
+
+  function closeOrderModal(){
+    document.getElementById('order-modal').classList.remove('show');
+    document.body.classList.remove('modal-open');
+  }
+
+  function confirmOrder(){
+    if(getCartCount() === 0){
+      alert('先に商品を選んでください。');
+      document.getElementById('products').scrollIntoView();
+      closeOrderModal();
+      return;
+    }
+
+    alert('ご注文ありがとうございます。これはデザインのデモです。決済機能はまだ接続されていません。');
+  }
+
+    function openShippingModal(){
+    document.getElementById('shipping-modal').classList.add('show');
+    document.body.classList.add('modal-open');
+  }
+
+  function closeShippingModal(){
+    document.getElementById('shipping-modal').classList.remove('show');
+    document.body.classList.remove('modal-open');
+  }
+
+  function openContactModal(){
+    document.getElementById('contact-modal').classList.add('show');
+    document.body.classList.add('modal-open');
+  }
+
+  function closeContactModal(){
+    document.getElementById('contact-modal').classList.remove('show');
+    document.body.classList.remove('modal-open');
+  }
+
+  function submitContactForm(e){
+    e.preventDefault();
+    alert('お問い合わせありがとうございます。これはデザインのデモです。送信機能はまだ接続されていません。');
+    e.target.reset();
+    closeContactModal();
+  }
+
+  // Close modal when clicking outside
+  document.addEventListener('DOMContentLoaded', function(){
+    const modal = document.getElementById('order-modal');
+    modal.addEventListener('click', function(e){
+      if(e.target === modal){
+        closeOrderModal();
+      }
+    });
+
+    document.addEventListener('click', function(e){
+      const nav = document.querySelector('.nav');
+      const menu = document.getElementById('mobile-menu');
+      if(menu.classList.contains('show') && !nav.contains(e.target)){
+        closeMobileMenu();
+      }
+    });
+
+    window.addEventListener('resize', function(){
+      if(window.innerWidth > 900){
+        closeMobileMenu();
+      }
+    });
+  });
+
+  function setMethod(method){
+    currentMethod = method;
+    const pickupBtn = document.getElementById('btn-pickup');
+    const deliveryBtn = document.getElementById('btn-delivery');
+    const title = document.getElementById('detail-title');
+    const locField = document.getElementById('loc-field');
+    const addressField = document.getElementById('address-field');
+    const timeLabel = document.getElementById('time-label');
+    const feeNote = document.getElementById('fee-note');
+
+    if(method === 'pickup'){
+      pickupBtn.classList.add('active');
+      deliveryBtn.classList.remove('active');
+      title.textContent = '店舗受け取りのご注文情報';
+      locField.style.display = '';
+      addressField.style.display = 'none';
+      timeLabel.textContent = '受け取り希望時間';
+    } else {
+      deliveryBtn.classList.add('active');
+      pickupBtn.classList.remove('active');
+      title.textContent = '自宅お届けのご注文情報';
+      locField.style.display = 'none';
+      addressField.style.display = '';
+      timeLabel.textContent = 'お届け希望時間帯';
+    }
+
+    updateOrderSummary();
+  }
+</script>
+
+</body>
+</html>
