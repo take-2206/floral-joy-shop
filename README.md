@@ -6,7 +6,7 @@ Online Flower Shop
 FLORAL JOY is a Japanese online flower shop website designed to make buying and receiving flowers simple, beautiful, and enjoyable.
 
 🌐 Live Demo
-https://take-2206.github.io/floral-joy-shop/
+fj-woad.vercel.app
 
 ✨ Overview
 
@@ -160,8 +160,7 @@ This project combines my experience in graphic design with my current studies in
 
 🌐 Live Demo
 
-👉 FLORAL JOY
-fj-woad.vercel.app
+
 
 📌 Project Status
 
