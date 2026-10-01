@@ -1,176 +1,173 @@
-🌸 FLORAL JOY
-Online Flower Shop
+<div align="center">
 
-毎日の暮らしに、新鮮な花と小さな「よろこび」を。
+<img src="./assets/logo.png" width="180">
 
-FLORAL JOY is a Japanese online flower shop website designed to make buying and receiving flowers simple, beautiful, and enjoyable.
+# 🌸 FLORAL JOY
 
-🌐 Live Demo
-fj-woad.vercel.app
+### Online Flower Shop
 
-✨ Overview
+**花と一緒に、小さな「よろこび」を。**
 
-FLORAL JOY is a flower shop web design project created with a focus on:
+A Japanese-inspired online flower shop designed to deliver
+fresh flowers, beautiful gifts, and small moments of happiness.
 
-🌸 Elegant visual design
-🛍️ Simple online shopping experience
-📱 Responsive interface
-💐 Flower product presentation
-🚚 Flexible delivery / store pickup
-🎁 Gift-oriented user experience
+<br>
 
-The concept is based on the idea that flowers can bring a small moment of happiness to everyday life.
+<a href="https://take-2206.github.io/floral-joy-shop/">
+  <img src="https://img.shields.io/badge/🌐%20LIVE%20DEMO-FLORAL%20JOY-ff6f91?style=for-the-badge">
+</a>
 
-🎨 Design Concept
-「よろこび」を花で届ける
+<br><br>
 
-The design uses a soft and elegant visual style to express:
+![Status](https://img.shields.io/badge/STATUS-COMPLETED-success?style=flat-square)
+![Responsive](https://img.shields.io/badge/RESPONSIVE-YES-blue?style=flat-square)
+![License](https://img.shields.io/badge/LICENSE-MIT-green?style=flat-square)
 
-Freshness · Warmth · Happiness · Elegance
+<br>
 
-The interface was designed to make users feel comfortable while browsing flowers and placing an order.
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white&style=flat-square)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white&style=flat-square)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black&style=flat-square)
+![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-222222?logo=github&logoColor=white&style=flat-square)
 
-🛍️ Main Features
-💐 Flower Products
+</div>
 
-Users can browse different bouquet sizes:
+---
 
-Product	Price	Purpose
-Bouquet S	¥3,300	Casual gifts
-Bouquet M	¥5,500	Standard gifts
-Bouquet L	¥8,800	Special celebrations
-🛒 Shopping Cart
+<div align="center">
+
+<img src="./assets/cover.png" width="90%">
+
+</div>
+
+---
+
+## 🌸 About FLORAL JOY
+
+**FLORAL JOY** is an online flower shop website created around the concept of:
+
+> **「毎日の暮らしに、新鮮な花と小さな『よろこび』を。」**
+
+The project combines **graphic design, branding, UI design, and web development** to create a warm and elegant flower shopping experience.
+
+Users can browse bouquets, select products, add them to a shopping cart, and choose between store pickup and home delivery.
+
+---
+
+# 💐 Brand & Product
+
+<div align="center">
+
+<img src="./assets/logo.png" width="150">
+
+<br><br>
+
+<img src="./assets/packaging.png" width="70%">
+
+<br><br>
+
+### 🌷 Product Collection
+
+<img src="./assets/product-01.png" width="30%">
+<img src="./assets/product-02.png" width="30%">
+<img src="./assets/product-03.png" width="30%">
+
+</div>
+
+---
+
+## 🎨 Design Concept
+
+The visual identity of FLORAL JOY is based on four keywords:
+
+### 🌸 Freshness
+Natural and fresh flower imagery.
+
+### 💗 Happiness
+Soft visual elements create a positive and friendly feeling.
+
+### 🎁 Gift
+The products are designed not only for personal use but also for gifting.
+
+### ✨ Elegance
+Simple layouts and generous whitespace create a clean and elegant appearance.
+
+---
+
+# 🛍️ Main Features
+
+### 💐 Flower Products
+
+Users can browse different flower bouquet options.
+
+- Bouquet S
+- Bouquet M
+- Bouquet L
+- Product details
+- Product pricing
+- Product images
+
+---
+
+### 🛒 Shopping Cart
 
 Users can:
 
-Add flowers to the cart
-Check selected products
-Review the order
-Continue shopping
-🚚 Flexible Receiving Options
+- Add products
+- Remove products
+- Change quantities
+- Review selected items
+- Check the total price
 
-Users can choose between:
+---
 
-🏪 Store Pickup
+### 🚚 Delivery
 
-Available at selected stores
-Preparation from 15 minutes
+Users can choose:
 
-🚚 Home Delivery
+**🏠 Home Delivery**
 
-Same-day delivery
-Delivery time selection
-Delivery fee from ¥350
-🎁 Gift Order
+or
 
-The order form supports:
+**🏪 Store Pickup**
 
-Recipient information
-Preferred date
-Preferred time
-Message card
-Additional notes
+The ordering interface provides the information necessary to complete the purchase.
 
-This allows users to customize their flower order for birthdays and other special occasions.
+---
 
-🔄 User Flow
-🌸 Choose Flowers
-       ↓
-🛒 Add to Cart
-       ↓
-📦 Choose Receiving Method
-       ↓
-📝 Enter Order Information
-       ↓
-💳 Confirm Order
-       ↓
-💐 Receive Flowers
-🖥️ Website Structure
-FLORAL JOY
-│
-├── 🏠 Home
-│
-├── 💐 Products
-│   ├── Bouquet S
-│   ├── Bouquet M
-│   └── Bouquet L
-│
-├── 🛒 Cart
-│
-├── 🚚 Delivery / Store Pickup
-│
-├── 📝 Order
-│
-├── 💌 Contact
-│
-└── ℹ️ About Us
-🎨 UI / UX
+### 🎁 Gift Ordering
 
-The interface focuses on creating a calm and elegant shopping experience.
+The website is designed to support flower gifting.
 
-Design Goals
-Clear product information
-Simple navigation
-Easy ordering process
-Visual emphasis on flowers
-Comfortable spacing
-Responsive layout
-Japanese e-commerce style
-🛠️ Technologies
-HTML
-CSS
-JavaScript
-Responsive Web Design
-GitHub Pages
-📱 Responsive Design
+Users can provide:
 
-The website is designed for different screen sizes:
+- Recipient information
+- Delivery date
+- Delivery time
+- Message card
+- Additional notes
 
-💻 Desktop
-📱 Mobile
-📲 Tablet
-📸 Screenshots
-🏠 Home
+---
 
+# 🔄 User Flow
 
+<div align="center">
 
-
-💐 Products
-
-
-
-
-🛒 Shopping Cart
-
-
-
-
-🚚 Order / Delivery
-
-
-
-
-👩‍🎨 Design & Development
-
-LE NGOC THANH TRUC
-
-Graphic Design × IT
-
-This project combines my experience in graphic design with my current studies in information engineering, focusing on creating a visually attractive and easy-to-use web experience.
-
-🌐 Live Demo
-
-
-
-📌 Project Status
-
-Completed
-
-This project was created as a design and web development portfolio project.
-
-💗 Concept
-
-花は友達のようなもの。
-あなたの世界を明るく彩ります。
-
-Flowers are like friends — they bring color and warmth to your world.
+```text
+       🌸
+   Browse Flowers
+        ↓
+       💐
+  Select Product
+        ↓
+       🛒
+   Add to Cart
+        ↓
+       🚚
+Delivery / Pickup
+        ↓
+       📝
+  Order Information
+        ↓
+       ✅
+   Order Complete
