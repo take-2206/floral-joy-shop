@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./assets/logo.png" width="180">
+<img src="./img/logo.png" width="180">
 
 # 🌸 FLORAL JOY
 
@@ -13,7 +13,7 @@ fresh flowers, beautiful gifts, and small moments of happiness.
 
 <br>
 
-<a href="https://take-2206.github.io/floral-joy-shop/">
+<a href="fj-shop.vercel.app">
   <img src="https://img.shields.io/badge/🌐%20LIVE%20DEMO-FLORAL%20JOY-ff6f91?style=for-the-badge">
 </a>
 
@@ -58,19 +58,19 @@ Users can browse bouquets, select products, add them to a shopping cart, and cho
 
 <div align="center">
 
-<img src="./assets/logo.png" width="150">
+<img src="./img/logo.png" width="150">
 
 <br><br>
 
-<img src="./assets/packaging.png" width="70%">
+<img src="./img/flower-box.png" width="70%">
 
 <br><br>
 
 ### 🌷 Product Collection
 
-<img src="./assets/product-01.png" width="30%">
-<img src="./assets/product-02.png" width="30%">
-<img src="./assets/product-03.png" width="30%">
+<img src="./img/s.png" width="30%">
+<img src="./img/M.png" width="30%">
+<img src="./img/L.png" width="30%">
 
 </div>
 
